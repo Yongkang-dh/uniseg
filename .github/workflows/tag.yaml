@@ -10,8 +10,29 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+    - name: Create tag
+      id: create_tag
+      run: |
+        latest_tag="v1.1.1"
+        echo "Latest tag: $latest_tag"
+        first=$(echo "$latest_tag" | cut -d '.' -f 1)
+        mid=$(echo "$latest_tag" | cut -d '.' -f 2)
+        last=$(echo "$latest_tag" | cut -d '.' -f 3)
+        mid=$((10#$mid))
+        last=$((10#$last))
+        if [ "$last" -ge 9 ]; then
+          mid=$((mid + 1))
+          last=1
+        else
+          last=$(( last+1 ))
+        fi
+        
+        new_tag="${first}.$mid.$last"
+        echo "New tag: $new_tag"
+        echo "::set-output name=new_tag::$new_tag"
+        
     - name: Tag commit
       uses: tvdias/github-tagger@v0.0.1
       with:
         repo-token: "${{ secrets.user_token }}"
-        tag: "my_tag"
+        tag: ${{ steps.create_new_tag.new_tag }}
