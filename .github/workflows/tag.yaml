@@ -12,19 +12,10 @@ jobs:
     steps:
     - name: CheckOut code
       uses: actions/checkout@v2
-      
-    - name: version-tag
-      id: tag
-      uses: anothrNick/github-tag-action@master # if we use 1 there is a too-be-fixed bug https://github.com/anothrNick/github-tag-action/actions/runs/3139501775/jobs/5099976842#step:1:35 as alternative we could use v1
-      env:
-        VERBOSE: true
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GIT_API_TAGGING: false # uses git cli
         
     - name: Create tag
       id: create_tag
       run: |
-        echo "tag: ${{ steps.tag.outputs.tag }}"
         git fetch --tags
         latest_tag=$(git describe --tags $(git rev-list --tags --max-count=1))
         echo "Latest tag: $latest_tag"
