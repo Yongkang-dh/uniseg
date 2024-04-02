@@ -13,6 +13,7 @@ jobs:
     - name: Create tag
       id: create_tag
       run: |
+        git fetch --tags
         latest_tag=$(git describe --tags $(git rev-list --tags --max-count=1))
         echo "Latest tag: $latest_tag"
         first=$(echo "$latest_tag" | cut -d '.' -f 1)
