@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: sh tst
       run: |
-        chmod 777 echo.sh
+        chmod 777 ./echo.sh
         bash echo.sh
 
     - name: CheckOut code
