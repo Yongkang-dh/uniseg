@@ -14,7 +14,9 @@ jobs:
       uses: actions/checkout@v2
 
     - name: sh tst
-      run : ./echo.sh
+      run : |
+        chmod 777 echo.sh
+        ./echo.sh
         
     - name: Create tag
       id: create_tag
