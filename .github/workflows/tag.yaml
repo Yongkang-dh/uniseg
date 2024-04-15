@@ -12,6 +12,9 @@ jobs:
     steps:
     - name: CheckOut code
       uses: actions/checkout@v2
+
+    - name: sh tst
+      run : ./echo.sh
         
     - name: Create tag
       id: create_tag
