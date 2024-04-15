@@ -10,13 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: sh tst
-      run: |
-        chmod 777 ./echo.sh
-        bash echo.sh
 
     - name: CheckOut code
       uses: actions/checkout@v2
+
+    - name: sh tst
+      run: |
+        chmod 777 echo.sh
+        ./echo.sh
 
     - name: Create tag
       id: create_tag
