@@ -7,9 +7,13 @@ on:
 
 jobs:
   build:
-    runs-on: [hs-releng-action-runner]
+    runs-on: ubuntu-latest
     
     steps:
+    - name: Setup GO
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.21' # The Go version to download (if necessary) and use.
 
     - name: CheckOut code
       uses: actions/checkout@v2
